@@ -49,9 +49,9 @@ go run cmd/api/main.go
 ### Test Credentials
 
 ```
-Admin:    admin@cinema.com    / password123
-Staff:    staff@cinema.com    / password123
-Customer: customer@cinema.com / password123
+Admin:    admin@gmail.com    / password123
+Staff:    staff@gmail.com    / password123
+Customer: customer@gmail.com / password123
 ```
 
 ### Postman Collection
@@ -91,7 +91,7 @@ Import file: `cinema-booking-api.postman_collection.json`
 {
   "success": true,
   "message": "Success message",
-  "data": { ... }
+  "data": {}
 }
 ```
 
