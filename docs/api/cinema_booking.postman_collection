@@ -1,0 +1,1078 @@
+{
+	"info": {
+		"_postman_id": "aa5ecf98-f7ba-46f9-8090-41acbc9fded1",
+		"name": "Cinema Booking",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27540150"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": [
+						{
+							"name": "Login as Admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"admin@gmail.com\",\r\n  \"password\": \"password123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 07 Oct 2025 16:46:00 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "459"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTUwZTg0MDAtZTI5Yi00MWQ0LWE3MTYtNDQ2NjU1NDQwMDQxIiwiZW1haWwiOiJhZG1pbkBjaW5lbWEuY29tIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzU5OTQxOTYwLCJpYXQiOjE3NTk4NTU1NjB9.wGuZD2ii3nKW--3cpJUPWNzlY04dQ7TOBSXrYbcLpcA\",\n        \"user\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440041\",\n            \"email\": \"admin@gmail.com\",\n            \"full_name\": \"Admin Cinema\",\n            \"phone\": \"081234567890\",\n            \"role\": \"admin\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Login as Staff",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"staff@gmail.com\",\r\n  \"password\": \"password123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 07 Oct 2025 16:48:18 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "459"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTUwZTg0MDAtZTI5Yi00MWQ0LWE3MTYtNDQ2NjU1NDQwMDQyIiwiZW1haWwiOiJzdGFmZkBjaW5lbWEuY29tIiwicm9sZSI6InN0YWZmIiwiZXhwIjoxNzU5OTQyMDk4LCJpYXQiOjE3NTk4NTU2OTh9.LDJr2078aZcvCgPu_5zre16nXnVxNrgFz_zOE5u9DJY\",\n        \"user\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440042\",\n            \"email\": \"staff@gmail.com\",\n            \"full_name\": \"Staff Cinema\",\n            \"phone\": \"081234567891\",\n            \"role\": \"staff\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Login as Customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"customer@gmail.com\",\r\n  \"password\": \"password123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 07 Oct 2025 16:48:47 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "469"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTUwZTg0MDAtZTI5Yi00MWQ0LWE3MTYtNDQ2NjU1NDQwMDQzIiwiZW1haWwiOiJjdXN0b21lckBjaW5lbWEuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNzU5OTQyMTI3LCJpYXQiOjE3NTk4NTU3Mjd9.vCRRc2jV0khk4I4oREknGfNssnHXpFy9rmyhIefav2E\",\n        \"user\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440043\",\n            \"email\": \"customer@gmail.com\",\n            \"full_name\": \"John Doe\",\n            \"phone\": \"081234567892\",\n            \"role\": \"customer\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Login with Wrong Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"admin@gmail.com\",\r\n  \"password\": \"wrongpassword\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 07 Oct 2025 16:49:19 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Login failed\",\n    \"error\": \"invalid email or password\"\n}"
+						},
+						{
+							"name": "Login with Invalid Body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"admin@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 07 Oct 2025 16:49:19 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Login failed\",\n    \"error\": \"invalid email or password\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Schedule",
+			"item": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"admin@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/auth/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": [
+				{
+					"name": "Login as Admin",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@gmail.com\",\r\n  \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Oct 2025 16:46:00 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "459"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTUwZTg0MDAtZTI5Yi00MWQ0LWE3MTYtNDQ2NjU1NDQwMDQxIiwiZW1haWwiOiJhZG1pbkBjaW5lbWEuY29tIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzU5OTQxOTYwLCJpYXQiOjE3NTk4NTU1NjB9.wGuZD2ii3nKW--3cpJUPWNzlY04dQ7TOBSXrYbcLpcA\",\n        \"user\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440041\",\n            \"email\": \"admin@gmail.com\",\n            \"full_name\": \"Admin Cinema\",\n            \"phone\": \"081234567890\",\n            \"role\": \"admin\"\n        }\n    }\n}"
+				},
+				{
+					"name": "Login as Staff",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"staff@gmail.com\",\r\n  \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Oct 2025 16:48:18 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "459"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTUwZTg0MDAtZTI5Yi00MWQ0LWE3MTYtNDQ2NjU1NDQwMDQyIiwiZW1haWwiOiJzdGFmZkBjaW5lbWEuY29tIiwicm9sZSI6InN0YWZmIiwiZXhwIjoxNzU5OTQyMDk4LCJpYXQiOjE3NTk4NTU2OTh9.LDJr2078aZcvCgPu_5zre16nXnVxNrgFz_zOE5u9DJY\",\n        \"user\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440042\",\n            \"email\": \"staff@gmail.com\",\n            \"full_name\": \"Staff Cinema\",\n            \"phone\": \"081234567891\",\n            \"role\": \"staff\"\n        }\n    }\n}"
+				},
+				{
+					"name": "Login as Customer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"customer@gmail.com\",\r\n  \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Oct 2025 16:48:47 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "469"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTUwZTg0MDAtZTI5Yi00MWQ0LWE3MTYtNDQ2NjU1NDQwMDQzIiwiZW1haWwiOiJjdXN0b21lckBjaW5lbWEuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNzU5OTQyMTI3LCJpYXQiOjE3NTk4NTU3Mjd9.vCRRc2jV0khk4I4oREknGfNssnHXpFy9rmyhIefav2E\",\n        \"user\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440043\",\n            \"email\": \"customer@gmail.com\",\n            \"full_name\": \"John Doe\",\n            \"phone\": \"081234567892\",\n            \"role\": \"customer\"\n        }\n    }\n}"
+				},
+				{
+					"name": "Login with Wrong Password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@gmail.com\",\r\n  \"password\": \"wrongpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Oct 2025 16:49:19 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "78"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Login failed\",\n    \"error\": \"invalid email or password\"\n}"
+				},
+				{
+					"name": "Login with Invalid Body",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Oct 2025 16:49:19 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "78"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Login failed\",\n    \"error\": \"invalid email or password\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{admin_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/schedules/9e1da209-9107-44ca-8ced-75bd9aa81e6b",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"schedules",
+						"9e1da209-9107-44ca-8ced-75bd9aa81e6b"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": [
+				{
+					"name": "Get w/o Authorization",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/schedules",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"schedules"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Oct 2025 16:55:06 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "62"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Authorization header is required\"\n}"
+				},
+				{
+					"name": "Get All",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/schedules",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"schedules"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Oct 2025 17:00:30 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "71"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Schedules retrieved successfully\",\n    \"data\": []\n}"
+				},
+				{
+					"name": "Get By ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/schedules/9e1da209-9107-44ca-8ced-75bd9aa81e6b",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"schedules",
+								"9e1da209-9107-44ca-8ced-75bd9aa81e6b"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Oct 2025 17:13:25 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "901"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Schedule retrieved successfully\",\n    \"data\": {\n        \"id\": \"9e1da209-9107-44ca-8ced-75bd9aa81e6b\",\n        \"movie_id\": \"550e8400-e29b-41d4-a716-446655440031\",\n        \"studio_id\": \"550e8400-e29b-41d4-a716-446655440021\",\n        \"show_date\": \"2025-10-20T00:00:00Z\",\n        \"show_time\": \"14:30:00\",\n        \"price\": 50000,\n        \"status\": \"active\",\n        \"created_at\": \"2025-10-08T00:09:52.755168+07:00\",\n        \"updated_at\": \"2025-10-08T00:09:52.755168+07:00\",\n        \"movie\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440031\",\n            \"title\": \"Avengers: Endgame\",\n            \"duration\": 181,\n            \"genre\": \"Action, Adventure, Sci-Fi\",\n            \"rating\": \"13+\",\n            \"release_date\": \"2025-04-26T00:00:00Z\"\n        },\n        \"studio\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440021\",\n            \"name\": \"Studio 1\",\n            \"total_seats\": 150,\n            \"cinema\": {\n                \"id\": \"550e8400-e29b-41d4-a716-446655440011\",\n                \"name\": \"Cinema XXI Grand Indonesia\",\n                \"address\": \"Jl. M.H. Thamrin No. 1, Jakarta Pusat\",\n                \"city\": {\n                    \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\n                    \"name\": \"Jakarta\",\n                    \"code\": \"JKT\"\n                }\n            }\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{admin_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"show_date\": \"2025-10-21\",\n  \"show_time\": \"19:00\",\n  \"price\": 65000,\n  \"status\": \"active\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/schedules/9e1da209-9107-44ca-8ced-75bd9aa81e6b",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"schedules",
+						"9e1da209-9107-44ca-8ced-75bd9aa81e6b"
+					]
+				},
+				"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+			},
+			"response": [
+				{
+					"name": "Update",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"show_date\": \"2025-10-21\",\n  \"show_time\": \"19:00\",\n  \"price\": 65000,\n  \"status\": \"active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/schedules/9e1da209-9107-44ca-8ced-75bd9aa81e6b",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"schedules",
+								"9e1da209-9107-44ca-8ced-75bd9aa81e6b"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Oct 2025 17:16:26 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "899"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Schedule updated successfully\",\n    \"data\": {\n        \"id\": \"9e1da209-9107-44ca-8ced-75bd9aa81e6b\",\n        \"movie_id\": \"550e8400-e29b-41d4-a716-446655440031\",\n        \"studio_id\": \"550e8400-e29b-41d4-a716-446655440021\",\n        \"show_date\": \"2025-10-21T00:00:00Z\",\n        \"show_time\": \"19:00:00\",\n        \"price\": 65000,\n        \"status\": \"active\",\n        \"created_at\": \"2025-10-08T00:09:52.755168+07:00\",\n        \"updated_at\": \"2025-10-08T00:16:26.425602+07:00\",\n        \"movie\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440031\",\n            \"title\": \"Avengers: Endgame\",\n            \"duration\": 181,\n            \"genre\": \"Action, Adventure, Sci-Fi\",\n            \"rating\": \"13+\",\n            \"release_date\": \"2025-04-26T00:00:00Z\"\n        },\n        \"studio\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440021\",\n            \"name\": \"Studio 1\",\n            \"total_seats\": 150,\n            \"cinema\": {\n                \"id\": \"550e8400-e29b-41d4-a716-446655440011\",\n                \"name\": \"Cinema XXI Grand Indonesia\",\n                \"address\": \"Jl. M.H. Thamrin No. 1, Jakarta Pusat\",\n                \"city\": {\n                    \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\n                    \"name\": \"Jakarta\",\n                    \"code\": \"JKT\"\n                }\n            }\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{admin_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"movie_id\": \"550e8400-e29b-41d4-a716-446655440031\",\r\n  \"studio_id\": \"550e8400-e29b-41d4-a716-446655440021\",\r\n  \"show_date\": \"2025-10-20\",\r\n  \"show_time\": \"14:30\",\r\n  \"price\": 50000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/schedules",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"schedules"
+					]
+				},
+				"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+			},
+			"response": [
+				{
+					"name": "Create",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"movie_id\": \"550e8400-e29b-41d4-a716-446655440031\",\r\n  \"studio_id\": \"550e8400-e29b-41d4-a716-446655440021\",\r\n  \"show_date\": \"2025-10-20\",\r\n  \"show_time\": \"14:30\",\r\n  \"price\": 50000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/schedules",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"schedules"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Oct 2025 17:03:34 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "899"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Schedule created successfully\",\n    \"data\": {\n        \"id\": \"f6697577-c6db-4cd6-8d6b-1bd63c277ef7\",\n        \"movie_id\": \"550e8400-e29b-41d4-a716-446655440031\",\n        \"studio_id\": \"550e8400-e29b-41d4-a716-446655440021\",\n        \"show_date\": \"2025-10-20T00:00:00Z\",\n        \"show_time\": \"14:30:00\",\n        \"price\": 50000,\n        \"status\": \"active\",\n        \"created_at\": \"2025-10-08T00:03:34.904572+07:00\",\n        \"updated_at\": \"2025-10-08T00:03:34.904572+07:00\",\n        \"movie\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440031\",\n            \"title\": \"Avengers: Endgame\",\n            \"duration\": 181,\n            \"genre\": \"Action, Adventure, Sci-Fi\",\n            \"rating\": \"13+\",\n            \"release_date\": \"2025-04-26T00:00:00Z\"\n        },\n        \"studio\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440021\",\n            \"name\": \"Studio 1\",\n            \"total_seats\": 150,\n            \"cinema\": {\n                \"id\": \"550e8400-e29b-41d4-a716-446655440011\",\n                \"name\": \"Cinema XXI Grand Indonesia\",\n                \"address\": \"Jl. M.H. Thamrin No. 1, Jakarta Pusat\",\n                \"city\": {\n                    \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\n                    \"name\": \"Jakarta\",\n                    \"code\": \"JKT\"\n                }\n            }\n        }\n    }\n}"
+				},
+				{
+					"name": "Create Not Allowed Role",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"movie_id\": \"550e8400-e29b-41d4-a716-446655440031\",\r\n  \"studio_id\": \"550e8400-e29b-41d4-a716-446655440021\",\r\n  \"show_date\": \"2025-10-20\",\r\n  \"show_time\": \"14:30\",\r\n  \"price\": 50000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/schedules",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"schedules"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Oct 2025 17:26:56 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "94"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Access denied: you don't have permission to access this resource\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{admin_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/schedules/9e1da209-9107-44ca-8ced-75bd9aa81e6b",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"schedules",
+						"9e1da209-9107-44ca-8ced-75bd9aa81e6b"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/schedules/9e1da209-9107-44ca-8ced-75bd9aa81e6b",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"schedules",
+								"9e1da209-9107-44ca-8ced-75bd9aa81e6b"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 07 Oct 2025 17:19:10 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "58"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Schedule deleted successfully\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://template.postman-echo.com"
+		}
+	]
+}

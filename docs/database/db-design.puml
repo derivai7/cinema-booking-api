@@ -1,0 +1,139 @@
+@startuml Cinema Booking System ERD
+
+!define table(x) class x
+!define primary_key(x) <b>x</b>
+!define foreign_key(x) <i>x</i>
+
+table(users) {
+  primary_key(id: UUID)
+  --
+  email: VARCHAR(255) UNIQUE NOT NULL
+  password: VARCHAR(255) NOT NULL
+  full_name: VARCHAR(255) NOT NULL
+  phone: VARCHAR(20)
+  role: ENUM('customer', 'admin', 'staff') DEFAULT 'customer'
+  created_at: TIMESTAMP
+  updated_at: TIMESTAMP
+}
+
+table(cities) {
+  primary_key(id: UUID)
+  --
+  name: VARCHAR(100) NOT NULL
+  code: VARCHAR(10) UNIQUE NOT NULL
+  created_at: TIMESTAMP
+}
+
+table(cinemas) {
+  primary_key(id: UUID)
+  --
+  foreign_key(city_id: UUID)
+  name: VARCHAR(255) NOT NULL
+  address: TEXT
+  phone: VARCHAR(20)
+  created_at: TIMESTAMP
+  updated_at: TIMESTAMP
+}
+
+table(studios) {
+  primary_key(id: UUID)
+  --
+  foreign_key(cinema_id: UUID)
+  name: VARCHAR(50) NOT NULL
+  total_seats: INTEGER NOT NULL
+  created_at: TIMESTAMP
+}
+
+table(seats) {
+  primary_key(id: UUID)
+  --
+  foreign_key(studio_id: UUID)
+  seat_number: VARCHAR(10) NOT NULL
+  row: VARCHAR(5) NOT NULL
+  seat_type: ENUM('regular', 'vip', 'premium') DEFAULT 'regular'
+  created_at: TIMESTAMP
+}
+
+table(movies) {
+  primary_key(id: UUID)
+  --
+  title: VARCHAR(255) NOT NULL
+  description: TEXT
+  duration: INTEGER NOT NULL
+  genre: VARCHAR(100)
+  rating: VARCHAR(10)
+  poster_url: VARCHAR(500)
+  release_date: DATE
+  created_at: TIMESTAMP
+  updated_at: TIMESTAMP
+}
+
+table(schedules) {
+  primary_key(id: UUID)
+  --
+  foreign_key(movie_id: UUID)
+  foreign_key(studio_id: UUID)
+  show_date: DATE NOT NULL
+  show_time: TIME NOT NULL
+  price: DECIMAL(10,2) NOT NULL
+  status: ENUM('active', 'cancelled', 'completed') DEFAULT 'active'
+  created_at: TIMESTAMP
+  updated_at: TIMESTAMP
+}
+
+table(bookings) {
+  primary_key(id: UUID)
+  --
+  foreign_key(user_id: UUID)
+  foreign_key(schedule_id: UUID)
+  booking_code: VARCHAR(20) UNIQUE NOT NULL
+  total_price: DECIMAL(10,2) NOT NULL
+  status: ENUM('pending', 'paid', 'cancelled', 'refunded') DEFAULT 'pending'
+  payment_method: VARCHAR(50)
+  paid_at: TIMESTAMP
+  created_at: TIMESTAMP
+  updated_at: TIMESTAMP
+}
+
+table(booking_seats) {
+  primary_key(id: UUID)
+  --
+  foreign_key(booking_id: UUID)
+  foreign_key(seat_id: UUID)
+  foreign_key(schedule_id: UUID)
+  status: ENUM('locked', 'sold', 'available') DEFAULT 'locked'
+  locked_at: TIMESTAMP
+  locked_by: UUID
+  created_at: TIMESTAMP
+}
+
+table(refunds) {
+  primary_key(id: UUID)
+  --
+  foreign_key(booking_id: UUID)
+  amount: DECIMAL(10,2) NOT NULL
+  reason: TEXT
+  refund_method: VARCHAR(50)
+  status: ENUM('pending', 'approved', 'rejected', 'completed') DEFAULT 'pending'
+  processed_at: TIMESTAMP
+  created_at: TIMESTAMP
+}
+
+users "1" --> "0..*" bookings
+cities "1" --> "0..*" cinemas
+cinemas "1" --> "0..*" studios
+studios "1" --> "0..*" seats
+movies "1" --> "0..*" schedules
+studios "1" --> "0..*" schedules
+schedules "1" --> "0..*" bookings
+bookings "1" --> "0..*" booking_seats
+bookings "1" --> "0..1" refunds
+seats "1" --> "0..*" booking_seats
+schedules "1" --> "0..*" booking_seats
+
+note right of booking_seats
+  - Seat locking agar tidak double booking
+  - locked_at untuk tracking timeout
+end note
+
+@enduml
